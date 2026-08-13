@@ -48,7 +48,6 @@
 - [🚀 Future Improvements](#-future-improvements)
 
 
----
 
 # 🌟 Project Overview
 
@@ -64,8 +63,6 @@ A user can simply ask:
 
 ```text
 Find John's open tickets and resolve his high-priority login issue.
-
-
 
 👤 User
    ↓
@@ -90,7 +87,7 @@ Find John's open tickets and resolve his high-priority login issue.
 🧠 Gemini
    ↓
 ✅ Final Answer
-
+```
 ---
 
 ## ✨ Features
@@ -154,8 +151,15 @@ The project contains three major layers:
 │              support.db                     │
 │                  tickets                    │
 └─────────────────────────────────────────────┘
+```
 
 ---
+
+
+
+
+
+
 
 ##🔄 Agent Workflow
 
@@ -215,7 +219,7 @@ The agent follows an autonomous tool-calling cycle.
                ▼
          ✅ FINAL ANSWER
 
----
+
 
 ##🧰 Technology Stack
 
