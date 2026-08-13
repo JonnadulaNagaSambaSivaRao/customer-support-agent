@@ -91,7 +91,7 @@ Find John's open tickets and resolve his high-priority login issue.
 ✅ Final Answer
 
 
-
+</p>
 ✨  Features
 
 | Feature                  | Description                                                     |
@@ -108,6 +108,7 @@ Find John's open tickets and resolve his high-priority login issue.
 | 🖥️ Cursor Support       | Connect the MCP server to Cursor                                |
 | 🔐 Environment Variables | Keep API keys outside source code                               |
 
+</p>
 
 🏗️ Architecture
 
