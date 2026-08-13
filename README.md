@@ -39,11 +39,6 @@
 - [🧰 Technology Stack](#-technology-stack)
 - [📁 Project Structure](#-project-structure)
 - [🗄️ Database Schema](#️-database-schema)
-- [🔌 MCP Tools](#-mcp-tools)
-- [⚙️ Prerequisites](#️-prerequisites)
-- [🚀 Installation](#-installation)
-- [🔑 Gemini API Key](#-gemini-api-key)
-- [▶️ Run the Application](#️-run-the-application)
 - [💬 Example Usage](#-example-usage)
 - [🔄 Multi-Step Task Example](#-multi-step-task-example)
 - [🖥️ Cursor MCP Integration](#️-cursor-mcp-integration)
@@ -51,7 +46,7 @@
 - [🛠️ Troubleshooting](#️-troubleshooting)
 - [🔐 Security](#-security)
 - [🚀 Future Improvements](#-future-improvements)
-- [👨‍💻 Author](#-author)
+
 
 ---
 
@@ -94,6 +89,7 @@ Find John's open tickets and resolve his high-priority login issue.
 🧠 Gemini
    ↓
 ✅ Final Answer
+
 
 
 ✨  Features
