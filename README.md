@@ -66,6 +66,7 @@ A user can simply ask:
 Find John's open tickets and resolve his high-priority login issue.
 
 
+
 👤 User
    ↓
 🧠 Gemini
@@ -90,30 +91,31 @@ Find John's open tickets and resolve his high-priority login issue.
    ↓
 ✅ Final Answer
 
+---
 
-</p>
-✨  Features
+## ✨ Features
 
-| Feature                  | Description                                                     |
-| ------------------------ | --------------------------------------------------------------- |
-| 🔎 Search Tickets        | Search tickets by customer, email, keyword, status, or priority |
-| 📄 Get Ticket            | Retrieve complete ticket details                                |
-| ✏️ Update Ticket         | Update status, priority, or assignee                            |
-| ➕ Create Ticket          | Create new customer-support tickets                             |
-| 🧠 Gemini Reasoning      | Gemini decides which tools are required                         |
-| 🔄 Multi-Step Tasks      | Execute multiple MCP tools automatically                        |
-| 🗄️ SQLite Backend       | Persist support tickets in a real database                      |
-| 🔌 MCP Integration       | Expose database operations as MCP tools                         |
-| 💬 CLI Chatbot           | Continue chatting until `exit`                                  |
-| 🖥️ Cursor Support       | Connect the MCP server to Cursor                                |
-| 🔐 Environment Variables | Keep API keys outside source code                               |
+| Feature | Description |
+|---|---|
+| 🔎 Search Tickets | Search tickets by customer, email, keyword, status, or priority |
+| 📄 Get Ticket | Retrieve complete ticket details |
+| ✏️ Update Ticket | Update status, priority, or assignee |
+| ➕ Create Ticket | Create new customer-support tickets |
+| 🧠 Gemini Reasoning | Gemini decides which tools are required |
+| 🔄 Multi-Step Tasks | Execute multiple MCP tools automatically |
+| 🗄️ SQLite Backend | Persist support tickets in a real database |
+| 🔌 MCP Integration | Expose database operations as MCP tools |
+| 💬 CLI Chatbot | Continue chatting until `exit` |
+| 🖥️ Cursor Support | Connect the MCP server to Cursor |
+| 🔐 Environment Variables | Keep API keys outside source code |
 
-</p>
+---
 
-🏗️ Architecture
+## 🏗️ Architecture
 
 The project contains three major layers:
 
+```text
 ┌─────────────────────────────────────────────┐
 │                  👤 USER                    │
 │                                             │
@@ -153,8 +155,9 @@ The project contains three major layers:
 │                  tickets                    │
 └─────────────────────────────────────────────┘
 
+---
 
-🔄 Agent Workflow
+##🔄 Agent Workflow
 
 The agent follows an autonomous tool-calling cycle.
 
@@ -212,8 +215,9 @@ The agent follows an autonomous tool-calling cycle.
                ▼
          ✅ FINAL ANSWER
 
+---
 
-🧰 Technology Stack
+##🧰 Technology Stack
 
 | Technology       | Purpose                               |
 | ---------------- | ------------------------------------- |
@@ -225,8 +229,9 @@ The agent follows an autonomous tool-calling cycle.
 | 🖥️ Cursor       | Development and MCP integration       |
 | 🔐 python-dotenv | Environment variable management       |
 
+---
 
-📁 Project Structure
+##📁 Project Structure
 
 The multi-file version of the project is organized as follows:
 
@@ -249,8 +254,9 @@ customer-support-agent/
 │
 └── 💾 support.db
 
+---
 
-🗄️ Database Schema
+##🗄️ Database Schema
 
 The application uses a SQLite database named:
 
@@ -270,9 +276,9 @@ tickets
 ├── assigned_to
 ├── created_at
 └── updated_at
+---
 
-
-▶️ Run the Application
+##▶️ Run the Application
 
 From the project directory:
 
@@ -298,7 +304,9 @@ Type 'exit' to quit.
 
 👤 You:
 
-🧠 How the Autonomous Loop Works
+---
+
+##🧠 How the Autonomous Loop Works
 
 The agent does not simply make one Gemini request.
 
@@ -378,8 +386,9 @@ A typical support workflow can look like:
  ▼
 ✅ Final Answer
 
+---
 
-🔐 Security
+##🔐 Security
 
 Never commit your Gemini API key.
 
@@ -390,8 +399,9 @@ __pycache__/
 *.pyc
 support.db
 
+---
 
-🎯 Learning Objectives
+##🎯 Learning Objectives
 
 This project demonstrates:
                     AI AGENTS
@@ -412,7 +422,9 @@ This project demonstrates:
                        ▼
               Business Operations
 
-📌 Final Architecture
+---
+
+##📌 Final Architecture
 ╔══════════════════════════════════════════════════════════╗
 ║                                                          ║
 ║             🎧 CUSTOMER SUPPORT AI AGENT                 ║
@@ -443,12 +455,13 @@ This project demonstrates:
 ║                                                          ║
 ╚══════════════════════════════════════════════════════════╝
 
+---
 
-
-⭐ Final Result
+# ⭐ Final Result
 
 The project demonstrates a complete autonomous customer-support workflow:
 
+```text
 🤖 Think
    ↓
 🔎 Search
@@ -462,28 +475,4 @@ The project demonstrates a complete autonomous customer-support workflow:
 🔍 Verify
    ↓
 ✅ Final Answer
-
-The AI does not directly access SQLite.
-
-Instead:
-
-Gemini
-   ↓
-MCP Client
-   ↓
-MCP Server
-   ↓
-MCP Tool
-   ↓
-SQLite
-
-
-<p align="center">
-
-💙 <b>Built with Python + Google Gemini + MCP + SQLite</b>
-
-</p> <p align="center">
-
-🤖 Think → 🔎 Search → 📄 Retrieve → ✏️ Update → 🔍 Verify → ✅ Answer
-
 </p> <p align="center">
