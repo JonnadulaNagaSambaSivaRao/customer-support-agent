@@ -108,188 +108,76 @@ Find John's open tickets and resolve his high-priority login issue.
 
 ---
 
-## 🏗️ Architecture
-
-The project contains three major layers:
+## 🔌 MCP Architecture
 
 ```text
-┌─────────────────────────────────────────────┐
-│                  👤 USER                    │
-│                                             │
-│        Natural Language Request             │
-└──────────────────────┬──────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────┐
-│               🧠 GEMINI AI                  │
-│                                             │
-│        Reasoning + Tool Selection           │
-└──────────────────────┬──────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────┐
-│               🔌 MCP CLIENT                 │
-│                                             │
-│       Communicates with MCP Server          │
-└──────────────────────┬──────────────────────┘
-                       │
-                       │ MCP
-                       ▼
-┌─────────────────────────────────────────────┐
-│               🛠️ MCP SERVER                │
-│                                             │
-│  search_tickets                             │
-│  get_ticket                                 │
-│  update_ticket                              │
-│  create_ticket                              │
-└──────────────────────┬──────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────┐
-│               🗄️ SQLite                    │
-│                                             │
-│              support.db                     │
-│                  tickets                    │
-└─────────────────────────────────────────────┘
+┌──────────────────────────────┐
+│          👤 USER             │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│        🧠 GEMINI AI          │
+│       Agent Reasoning        │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       🔌 MCP CLIENT          │
+└──────────────┬───────────────┘
+               │
+               │ MCP
+               ▼
+┌──────────────────────────────┐
+│       🛠️ MCP SERVER         │
+│                              │
+│ search_tickets               │
+│ get_ticket                   │
+│ update_ticket                │
+│ create_ticket                │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         🗄️ SQLITE           │
+│          support.db          │
+└──────────────────────────────┘
 ```
 
----
-
-
-
-
-
-
-
-##🔄 Agent Workflow
-
-The agent follows an autonomous tool-calling cycle.
-
-                 👤 USER
-                    │
-                    ▼
-          "Find John's open tickets"
-                    │
-                    ▼
-              🧠 GEMINI
-                    │
-                    ▼
-          Need database information?
-                    │
-                    ▼
-              🔎 SEARCH TOOL
-                    │
-                    ▼
-                🗄️ SQLITE
-                    │
-                    ▼
-             Search Result
-                    │
-                    ▼
-              🧠 GEMINI
-                    │
-             Need more information?
-                /          \
-              YES           NO
-               │             │
-               ▼             ▼
-        📄 GET TICKET    ✅ FINAL ANSWER
-               │
-               ▼
-           🗄️ SQLITE
-               │
-               ▼
-          Ticket Details
-               │
-               ▼
-           🧠 GEMINI
-               │
-               ▼
-        Need another tool?
-               │
-               ▼
-        ✏️ UPDATE TICKET
-               │
-               ▼
-           🗄️ SQLITE
-               │
-               ▼
-           🧠 GEMINI
-               │
-               ▼
-         ✅ FINAL ANSWER
-
-
-
-##🧰 Technology Stack
-
-| Technology       | Purpose                               |
-| ---------------- | ------------------------------------- |
-| 🐍 Python 3.12+  | Application development               |
-| 🧠 Google Gemini | AI reasoning and tool selection       |
-| 🔌 MCP           | AI-to-tool communication              |
-| 🗄️ SQLite       | Ticket database                       |
-| ⚡ uv             | Python package/environment management |
-| 🖥️ Cursor       | Development and MCP integration       |
-| 🔐 python-dotenv | Environment variable management       |
-
----
-
-##📁 Project Structure
-
-The multi-file version of the project is organized as follows:
-
-customer-support-agent/
-│
-├── 📁 .cursor/
-│   └── mcp.json
-│
-├── 📁 .venv/
-│
-├── 🔐 .env
-├── 🚫 .gitignore
-├── 📦 pyproject.toml
-├── 📖 README.md
-│
-├── 🤖 agent.py
-├── 🖥️ main.py
-├── 🔌 mcp_support.py
-├── 🗄️ init_db.py
-│
-└── 💾 support.db
-
----
-
-##🗄️ Database Schema
+## 🗄️ Database Schema
 
 The application uses a SQLite database named:
 
-support.db
+`support.db`
 
-The database contains a tickets table.
+The database contains a `tickets` table.
 
-tickets
-│
-├── id
-├── customer_name
-├── email
-├── subject
-├── description
-├── priority
-├── status
-├── assigned_to
-├── created_at
-└── updated_at
+| Column | Description |
+|---|---|
+| `id` | Unique ticket ID |
+| `customer_name` | Customer name |
+| `email` | Customer email |
+| `subject` | Ticket subject |
+| `description` | Ticket description |
+| `priority` | Ticket priority |
+| `status` | Ticket status |
+| `assigned_to` | Assigned support agent |
+| `created_at` | Ticket creation time |
+| `updated_at` | Last update time |
+
 ---
 
-##▶️ Run the Application
+## ▶️ Run the Application
 
 From the project directory:
 
+```powershell
 uv run python main.py
+```
 
 Expected output:
 
+```text
 =================================================================
         🎧 CUSTOMER SUPPORT AI AGENT
 =================================================================
@@ -307,134 +195,128 @@ Type 'exit' to quit.
 ✅ MCP server connected
 
 👤 You:
+```
 
 ---
 
-##🧠 How the Autonomous Loop Works
+## 🧠 How the Autonomous Loop Works
 
-The agent does not simply make one Gemini request.
+The agent does not make only one Gemini request.
 
-It runs a loop:
-User Request
-     │
-     ▼
-   Gemini
-     │
-     ▼
-Does Gemini need a tool?
-     │
-   YES
-     │
-     ▼
- MCP Tool
-     │
-     ▼
- SQLite
-     │
-     ▼
- Tool Result
-     │
-     ▼
-   Gemini
-     │
-     ├───────────────┐
-     │               │
-     ▼               ▼
- Another Tool      No Tool
-     │               │
-     ▼               ▼
-   SQLite        Final Answer
-     │
-     ▼
-   Gemini
+It can repeatedly reason, call an MCP tool, inspect the result, and decide whether another tool is required.
 
-🔍 Example: Search → Retrieve → Update → Verify
+```text
+👤 User Request
+      ↓
+🧠 Gemini
+      ↓
+🔎 MCP Tool
+      ↓
+🗄️ SQLite
+      ↓
+📤 Tool Result
+      ↓
+🧠 Gemini
+      ↓
+   Another Tool?
+    ↙       ↘
+  YES        NO
+   ↓          ↓
+🛠️ MCP     ✅ Final Answer
+ Tool
+   ↓
+🗄️ SQLite
+   ↓
+📤 Result
+   ↓
+🧠 Gemini
+   ↓
+Continue
+```
 
-A typical support workflow can look like:
+### Example
+
+```text
 👤 User
- │
- │ "Resolve John's login issue"
- ▼
+   ↓
+"Resolve John's login issue"
+   ↓
 🧠 Gemini
- │
- ▼
+   ↓
 🔎 Search Tickets
- │
- ▼
+   ↓
 🗄️ SQLite
- │
- ▼
+   ↓
 📄 Get Ticket
- │
- ▼
+   ↓
 🗄️ SQLite
- │
- ▼
+   ↓
 🧠 Gemini
- │
- ▼
+   ↓
 ✏️ Update Ticket
- │
- ▼
+   ↓
 🗄️ SQLite
- │
- ▼
-🧠 Gemini
- │
- ▼
+   ↓
 🔎 Verify
- │
- ▼
+   ↓
 🗄️ SQLite
- │
- ▼
+   ↓
 ✅ Final Answer
+```
 
 ---
 
-##🔐 Security
+## 🔐 Security
 
 Never commit your Gemini API key.
 
-Your .gitignore should include:
+Your `.gitignore` should contain:
+
+```gitignore
 .env
 .venv/
 __pycache__/
 *.pyc
 support.db
+```
+
+Your `.env` should contain:
+
+```env
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+```
 
 ---
 
-##🎯 Learning Objectives
+## 🎯 Learning Objectives
 
 This project demonstrates:
-                    AI AGENTS
-                       │
-          ┌────────────┼────────────┐
-          │            │            │
-          ▼            ▼            ▼
-       Gemini         MCP         SQLite
-          │            │            │
-          └────────────┼────────────┘
-                       │
-                       ▼
-                Tool Calling
-                       │
-                       ▼
-              Autonomous Workflow
-                       │
-                       ▼
-              Business Operations
+
+```text
+AI Agents
+   ↓
+Google Gemini
+   ↓
+Tool Calling
+   ↓
+Model Context Protocol
+   ↓
+Autonomous Workflow
+   ↓
+Business Operations
+   ↓
+SQLite Database
+```
 
 ---
 
-##📌 Final Architecture
+## 📌 Final Architecture
+
+```text
 ╔══════════════════════════════════════════════════════════╗
-║                                                          ║
 ║             🎧 CUSTOMER SUPPORT AI AGENT                 ║
 ║                                                          ║
-║                  Gemini + MCP + SQLite                   ║
-║                                                          ║
+║                 Gemini + MCP + SQLite                    ║
 ╠══════════════════════════════════════════════════════════╣
 ║                                                          ║
 ║   👤 User                                                ║
@@ -458,25 +340,11 @@ This project demonstrates:
 ║   ✅ Final Answer                                        ║
 ║                                                          ║
 ╚══════════════════════════════════════════════════════════╝
+```
 
 ---
 
-# ⭐ Final Result
 
-The project demonstrates a complete autonomous customer-support workflow:
+```
 
-```text
-🤖 Think
-   ↓
-🔎 Search
-   ↓
-📄 Retrieve
-   ↓
-🧠 Analyze
-   ↓
-✏️ Update
-   ↓
-🔍 Verify
-   ↓
-✅ Final Answer
-</p> <p align="center">
+## Next Heading
