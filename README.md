@@ -58,6 +58,8 @@ Feature	Description
 
 
 🧰 Technology Stack
+
+
 ┌─────────────────────────────────────┐
 │         CUSTOMER SUPPORT AI         │
 ├─────────────────────────────────────┤
@@ -135,6 +137,8 @@ The agent follows an autonomous tool-calling cycle.
 
 
 The architecture is:
+
+
 
                  👤 USER
                     │
@@ -289,6 +293,8 @@ Final Answer
 
 
 ⭐ Final Result
+
+
 ╔══════════════════════════════════════════════════════════╗
 ║                                                          ║
 ║          🎧 CUSTOMER SUPPORT AI AGENT                    ║
